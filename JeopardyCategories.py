@@ -1,4 +1,3 @@
-
 def categoriesByRound():
    All_Rounds = ["Before & After",
                  "Literature",
