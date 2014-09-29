@@ -38,18 +38,13 @@ def _url(category):
 
 def _questionAndAnswers(elements):
    for i in _clueValueIndices(elements):
-      yield _textTuple(elements, i + 1)
+      yield _nextTwoValues(elements, i)
 
 def _clueValueIndices(elements):
    return (i for i, x in enumerate(elements) if re.match("\$\d+", x) is not None)
 
-def _textTuple(elements, i):
-   i1 = _nextText(elements, i)
-   i2 = _nextText(elements, i1 + 1)
-   return _cleanUp(elements[i1]), _cleanUp(elements[i2])
-
-def _nextText(elements, i):
-   return next(i for i, x in enumerate(elements, i))
+def _nextTwoValues(elements, i):
+   return _cleanUp(elements[i + 1]), _cleanUp(elements[i + 2])
 
 def _cleanUp(element):
-   return element.strip().replace(": (", "").replace(":","").encode('utf8', 'replace')
+   return element.strip().replace(": (", "").replace(":", "").encode('utf8', 'replace')
